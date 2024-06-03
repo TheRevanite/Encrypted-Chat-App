@@ -1,13 +1,12 @@
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 from flask_socketio import join_room, leave_room, send, SocketIO, emit
 import random
-import secrets
 from string import ascii_uppercase
 from datetime import datetime
 import sqlite3
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = secrets.token_hex(16)
+app.config["SECRET_KEY"] = 'the_most_random_thing'
 socketio = SocketIO(app)
 
 rooms = {}
