@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="message-box">
+  <h2>Encrypted Chat Room: {{ code }}</h2>
+  <div class="messages" id="messages">
+  </div>
+  <div class="inputs">
+    <input
+      type="text"
+      rows="3"
+      placeholder="Message"
+      name="message"
+      id="message"
+      onkeypress="handleKeyPress(event)"
+    />
+    <button type="button" name="send" id="send-btn" onClick="sendMessage()">Send</button>
+    <button type="button" name="disconnect" id="disconnect-btn">Leave room</button>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var socketio = io();
+  const messages = document.getElementById("messages");
+
+  const createMessage = (name, msg, isSent) => {
+    const content = `
+      <div class="message ${isSent ? 'sent' : 'received'}">
+        <span class="message-content"><strong>${name}</strong>: ${msg}</span>
+        <span class="timestamp">${new Date().toLocaleString()}</span>
+      </div>
+    `;
+    messages.insertAdjacentHTML('beforeend', content);
+    messages.scrollTop = messages.scrollHeight;  
+  };
+
+  socketio.on("message", (data) => {
+    if (data.name !== "{{ session['name'] }}") {
+      createMessage(data.name, data.message, false);
+    }
+  });
+
+  const sendMessage = () => {
+    const message = document.getElementById("message");
+    if (message.value.trim() === "") return;
+   
+    createMessage("You", message.value, true);
+    socketio.emit("message", { data: message.value });
+    message.value = "";
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.keyCode === 13) {
+      sendMessage();
+    }
+  };
+
+ 
+  const disconnect = () => {
+    socketio.emit("disconnect_request");
+    window.location.href = "/";  
+  };
+
+  document.getElementById("disconnect-btn").addEventListener("click", disconnect);
+
+  
+  fetch('/initial_messages')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(msg => {
+        createMessage(msg.name, msg.message, msg.is_sent);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching initial messages:', error);
+    });
+</script>
+{% endblock %}

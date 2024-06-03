@@ -1,0 +1,141 @@
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.join {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.create-btn {
+  width: 100%;
+}
+
+.message-box {
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 10px;
+  background-color: #dadada;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  align-items: stretch;
+  padding: 20px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+
+}
+  .message-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url(wallpaperflare.com_wallpaper.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(5px); 
+    z-index: -1; 
+  }
+  
+
+
+.messages {
+  overflow-y: scroll;
+  flex: 1;
+  width: 100%;
+}
+
+.inputs {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+h2 {
+  text-align: center;
+ 
+}
+
+#message {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#send-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #128c7e; 
+  color: #fff; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease; 
+}
+
+#send-btn:hover {
+  background-color: #0d6b5f; 
+}
+.sent, .received {
+  max-width: 70%;
+  word-wrap: break-word;
+  padding: 10px 15px; 
+  border-radius: 20px;
+  margin-bottom: 10px; 
+  position: relative;
+}
+
+.sent {
+  background-color: #dcf8c6; 
+  align-self: flex-end;
+}
+
+.received {
+  background-color: #ffffff;
+  align-self: flex-start;
+}
+
+.message-content {
+  display: inline-block;
+}
+
+.timestamp {
+  font-size: 12px; 
+  color: grey; 
+  float: right; 
+  margin-left: 10px; 
+}
+
+
+#disconnect-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #128c7e; 
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease; 
+}
+
+#disconnect-btn:hover {
+  background-color: #0d6b5f; 
+}
